@@ -10,7 +10,6 @@ namespace AudioShop.Api.Controller
         [HttpGet ("ping")]
         public IActionResult Ping()
         {
-            var currentTime = DateTime.UtcNow;  
             return Ok("pong");
         }   
     }
