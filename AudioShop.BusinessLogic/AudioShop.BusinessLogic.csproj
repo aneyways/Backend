@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AudioShop.Domain\AudioShop.Domain.csproj" />
+    <ProjectReference Include="..\AudioShop.Helpers\AudioShop.Helpers.csproj" />
+  </ItemGroup>
+
+</Project>
