@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace AudioShop.BusinessLogic.Interface
 {
-    public class UserBL : IUser 
+    public class UserBL : IUser
     {
     }
 }
