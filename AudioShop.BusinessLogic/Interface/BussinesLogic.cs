@@ -6,7 +6,7 @@ namespace AudioShop.BusinessLogic
 {
     public class BusinessLogic
     {
-        public UserBL GetUserBL()
+        public IUser GetUserBL()
         {
             return new UserBL();
         }
