@@ -7,7 +7,8 @@ using AudioShop.Domains.Models.Base;
 using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Interface
-{
+{ 
+   
     public interface IProduct
     {
         List<ProductDto> GetAllProductsAction();

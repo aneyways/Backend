@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioShop.Domains.Models.User;
+using AudioShop.Domains.Models.User; 
 
 namespace AudioShop.BusinessLogic.Interface
 {
+
     public interface IAuthActions
     {
         object? LoginActionFlow(UserAuthAction auth);
