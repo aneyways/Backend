@@ -11,6 +11,7 @@ using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Core.Products
 {
+
     public class ProductAction
     {
         protected List<ProductDto> ExecuteGetAllProductsAction()
