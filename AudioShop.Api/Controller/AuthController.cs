@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AudioShop.Domains.Models.User;
 
-namespace eUShop.Api.Controller
+namespace AudioShop.Api.Controller
 {
 	[Route("api/session")]
 	[ApiController]
