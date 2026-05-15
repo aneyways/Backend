@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AudioShop.Domains.Entitiies.Order;
+using AudioShop.Domains.Entitiies.Product;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using AudioShop.Domains.Entitiies.Order;
 
 namespace AudioShop.Domains.Entitiies.Order
 {
@@ -10,14 +11,19 @@ namespace AudioShop.Domains.Entitiies.Order
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
         public int OrderId { get; set; }
 
         [ForeignKey("OrderId")]
-        public OrderData Order { get; set; }
+        public OrderData? Order { get; set; }
 
-        public string ProductInfo { get; set; }
-        public int Qua { get; set; }
+        [Required]
+        public int ProductId { get; set; }
+
+        [ForeignKey("ProductId")]
+        public ProductData? Product { get; set; }
+
+        public int Quantity { get; set; }
         public decimal Price { get; set; }
-        public decimal Discount { get; set; }
     }
 }
