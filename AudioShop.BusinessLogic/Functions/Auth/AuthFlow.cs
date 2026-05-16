@@ -1,67 +1,59 @@
-﻿using System.ComponentModel;
-using AudioShop.BusinessLogic.Functions.Order;
-using AudioShop.BusinessLogic.Functions.Products;
-using AudioShop.BusinessLogic.Functions.SiteReview;
-using AudioShop.BusinessLogic.Functions.SubCategory;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AudioShop.BusinessLogic.Core.Auth;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.BusinessLogic.Functions.Auth;
-using AudioShop.BusinessLogic.Functions.Cart;
-using AudioShop.BusinessLogic.Functions.Category;
-using AudioShop.BusinessLogic.Functions.Order;
-using AudioShop.BusinessLogic.Functions.ProductReview;
-using AudioShop.BusinessLogic.Functions.Products;
-using AudioShop.BusinessLogic.Functions.SiteReview;
-using AudioShop.BusinessLogic.Functions.SubCategory;
-using AudioShop.BusinessLogic.Functions.User;
-using AudioShop.BusinessLogic.Interface;
-
-namespace AudioShop.BusinessLogic
+using AudioShop.Domains.Models.Auth;
+using AudioShop.Domains.Models.Base;
+using AudioShop.Domains.Models.User;
+namespace AudioShop.BusinessLogic.Functions.Auth
 {
-    public class BusinessLogic
+    public class AuthFlow : AuthActions, IAuthActions
     {
-        public BusinessLogic() { }
-        public IAuthActions GetAuthActions()
+        public ResponseAction UserRegisterAction(UserRegisterData data)
         {
-            return new AuthFlow();
+            var user = ExecuteUserRegisterAction(data);
+
+            if (user == null)
+            {
+                return new ResponseAction
+                {
+                    IsSuccess = false,
+                    Message = "User with this Username or Email already exists"
+                };
+            }
+
+            return new ResponseAction
+            {
+                IsSuccess = true,
+                Message = "Successly registered",
+                Id = user.Id
+            };
         }
 
-        public IProductActions GetProductActions()
+        public ResponseAction UserLoginAction(UserLoginData auth)
         {
-            return new ProductFlow();
-        }
+            var user = ExecuteUserLoginAction(auth);
 
-        public IUserActions GetUserActions()
-        {
-            return new UserFlow();
-        }
+            if (user == null)
+            {
+                return new ResponseAction
+                {
+                    IsSuccess = false,
+                    Message = "Invalid username or password"
+                };
+            }
 
-        public IOrderActions GetOrderActions()
-        {
-            return new OrderFlow();
-        }
+            var token = GenerateUserToken(user);
 
-        public ISiteReviewActions GetSiteReviewActions()
-        {
-            return new SiteReviewFlow();
-        }
-
-        public ICartActions GetCartActions()
-        {
-            return new CartFlow();
-        }
-
-        public IProductReviewActions GetProductReviewActions()
-        {
-            return new ProductReviewFlow();
-        }
-
-        public ICategoryActions GetCategoryActions()
-        {
-            return new CategoryFlow();
-        }
-        public ISubCategoryActions GetSubCategoryActions()
-        {
-            return new SubCategoryFlow();
+            return new ResponseAction
+            {
+                IsSuccess = true,
+                Message = token,
+                Id = user.Id
+            };
         }
     }
 }

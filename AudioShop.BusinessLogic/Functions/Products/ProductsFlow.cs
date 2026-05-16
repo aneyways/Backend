@@ -1,38 +1,140 @@
-﻿using AudioShop.BusinessLogic.Core.Products;
+﻿using AudioShop.BusinessLogic.Interface;
+using AudioShop.BusinessLogic.Core.Products;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Models.Base;
+using AudioShop.Domains.Entities.Product;
+using AudioShop.Domains.Models.Category;
 using AudioShop.Domains.Models.Product;
-
 namespace AudioShop.BusinessLogic.Functions.Products
 {
-    public class ProductFlow : ProductAction, IProductAction
+    public class ProductFlow : ProductAction, IProductActions
     {
-        public List<ProductDto> GetAllProductsAction()
+        public List<ProductInfoDto> GetAllProductsAction()
         {
-            var products = ExecuteGetAllProductsAction();
-            //product = GetOrientedProductsForAccount(products);
+            var productsData = ExecuteGetAllProductsAction();
+            var productsDto = new List<ProductInfoDto>();
 
-            return products;
+            foreach (var product in productsData)
+            {
+                productsDto.Add(MapToDto(product));
+            }
+
+            return productsDto;
         }
 
-        public ProductDto GetProductByIdAction(int id)
+        public ProductInfoDto? GetProductByIdAction(int id)
         {
-            return GetProductDataByIdAction(id);
+            var product = ExecuteGetProductByIdAction(id);
+
+            if (product == null)
+            {
+                return null;
+            }
+
+            return MapToDto(product);
         }
 
-        public ResponceMsg ResponceProductUpdateAction(ProductDto product)
+        public List<ProductInfoDto> GetProductsByCategoryAction(int categoryId)
         {
-            return ExecuteProductUpdateAction(product);
+            var productsData = ExecuteGetProductsByCategoryAction(categoryId);
+            var productsDto = new List<ProductInfoDto>();
+
+            foreach (var product in productsData)
+            {
+                productsDto.Add(MapToDto(product));
+            }
+
+            return productsDto;
         }
 
-        public ResponceMsg ResponceProductDeleteAction(int id)
+        public List<ProductInfoDto> GetProductsBySubCategoryAction(int subCategoryId)
         {
-            return ExecuteProductDeleteAction(id);
+            var productsData = ExecuteGetProductsBySubCategoryAction(subCategoryId);
+            var productsDto = new List<ProductInfoDto>();
+
+            foreach (var product in productsData)
+            {
+                productsDto.Add(MapToDto(product));
+            }
+
+            return productsDto;
         }
 
-        public ResponceMsg ResponceProductCreateAction(ProductDto product)
+        public ProductInfoDto? CreateProductAction(ProductCreateDto product)
         {
-            return ExecuteProductCreateAction(product);
+            var createdProduct = ExecuteCreateProductAction(product);
+
+            if (createdProduct == null)
+            {
+                return null;
+            }
+
+            return MapToDto(createdProduct);
+        }
+
+        public ProductInfoDto? UpdateProductAction(int id, ProductCreateDto product)
+        {
+            var updatedProduct = ExecuteUpdateProductAction(id, product);
+
+            if (updatedProduct == null)
+            {
+                return null;
+            }
+
+            return MapToDto(updatedProduct);
+        }
+
+        public bool DeleteProductAction(int id)
+        {
+            return ExecuteDeleteProductAction(id);
+        }
+
+        private ProductInfoDto MapToDto(ProductData product)
+        {
+            return new ProductInfoDto()
+            {
+                Id = product.Id,
+                Name = product.Name,
+
+                Description = product.Description != null ? new ProductDescriptionInfoDto()
+                {
+                    Id = product.Description.Id,
+                    Description = product.Description.Description,
+                    ProductId = product.Description.ProductId
+                } : null,
+
+                Category = product.Category != null ? new CategoryInfoDto()
+                {
+                    Id = product.Category.Id,
+                    Name = product.Category.Name,
+                    SubCategories = product.Category.SubCategories != null
+                        ? product.Category.SubCategories.Select(subCategory => new SubCategoryInfoDto()
+                        {
+                            Id = subCategory.Id,
+                            Name = subCategory.Name,
+                            CategoryId = subCategory.CategoryId
+                        }).ToList()
+                        : new List<SubCategoryInfoDto>()
+                } : null,
+
+                SubCategory = product.SubCategory != null ? new SubCategoryInfoDto()
+                {
+                    Id = product.SubCategory.Id,
+                    Name = product.SubCategory.Name,
+                    CategoryId = product.SubCategory.CategoryId
+                } : null,
+
+                Images = product.Images != null
+                    ? product.Images.Select(img => new ProductImgInfoDto()
+                    {
+                        Id = img.Id,
+                        Url = img.Url,
+                        ProductId = img.ProductId
+                    }).ToList()
+                    : new List<ProductImgInfoDto>(),
+
+                Price = product.Price,
+                Status = product.Status,
+            };
         }
     }
 }
