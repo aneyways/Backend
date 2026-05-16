@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37012.4 d17.14
+VisualStudioVersion = 17.14.37012.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioShop.Api", "AudioShop.Api\AudioShop.Api.csproj", "{8181C90E-69FE-4DFD-96B7-A1A46090B4E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioShop.BusinessLogic", "AudioShop.BusinessLogic\AudioShop.BusinessLogic.csproj", "{3AF594DD-6624-2698-EC80-1F8DEC6B602D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioShop.Domains", "AudioShop.Domain\AudioShop.Domains.csproj", "{05C83B52-268B-4598-0867-88201CCA8CE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioShop.DataAccess", "AudioShop.DataAccess\AudioShop.DataAccess.csproj", "{A0705BDB-0A5F-43E2-8561-A71DFD817D6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{8181C90E-69FE-4DFD-96B7-A1A46090B4E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8181C90E-69FE-4DFD-96B7-A1A46090B4E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8181C90E-69FE-4DFD-96B7-A1A46090B4E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF594DD-6624-2698-EC80-1F8DEC6B602D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF594DD-6624-2698-EC80-1F8DEC6B602D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF594DD-6624-2698-EC80-1F8DEC6B602D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF594DD-6624-2698-EC80-1F8DEC6B602D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C83B52-268B-4598-0867-88201CCA8CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C83B52-268B-4598-0867-88201CCA8CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C83B52-268B-4598-0867-88201CCA8CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C83B52-268B-4598-0867-88201CCA8CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0705BDB-0A5F-43E2-8561-A71DFD817D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0705BDB-0A5F-43E2-8561-A71DFD817D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0705BDB-0A5F-43E2-8561-A71DFD817D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0705BDB-0A5F-43E2-8561-A71DFD817D6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
