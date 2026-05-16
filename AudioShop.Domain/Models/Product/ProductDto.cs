@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioShop.Domains.Entitiies.Product;
+using AudioShop.Domains.Entities.Product;
 
 
 namespace AudioShop.Domains.Models.Product

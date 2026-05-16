@@ -1,5 +1,5 @@
 ﻿
-using AudioShop.Domains.Entitiies.Order;
+using AudioShop.Domains.Entities.Order;
 
 namespace AudioShop.Domains.Models.Order
 {

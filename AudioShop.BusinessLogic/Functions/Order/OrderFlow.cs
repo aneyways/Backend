@@ -1,36 +1,99 @@
 ﻿using AudioShop.BusinessLogic.Core.Order;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Models.Base;
-using AudioShop .Domains.Models.Order;
+using AudioShop.Domains.Entities.Order;
+using AudioShop.Domains.Enums;
+using AudioShop.Domains.Models.Order;
 
-namespace AudioShop .BusinessLogic.Functions.Order
+namespace AudioShop.BusinessLogic.Functions.Order
 {
-    public class OrderFlow : OrderAction, IOrderAction
+    public class OrderFlow : OrderActions, IOrderActions
     {
-
-        public List<OrderDto> GetAllOrders()
+        public List<OrderInfoDto> GetAllOrdersAction()
         {
-            return GetAllOrdersAction();
+            var orders = ExecuteGetAllOrdersAction();
+
+            var dtoList = new List<OrderInfoDto>();
+
+            foreach (var order in orders)
+            {
+                dtoList.Add(MapToDto(order));
+            }
+
+            return dtoList;
         }
 
-        public OrderDto GetOrderItem(int id)
+        public List<OrderInfoDto> GetUserOrdersByIdAction(int userId)
         {
-            return GetOrderByIdAction(id);
+            var orders = ExecuteGetUserOrdersByIdAction(userId);
+
+            var dtoList = new List<OrderInfoDto>();
+
+            foreach (var order in orders)
+            {
+                dtoList.Add(MapToDto(order));
+            }
+
+            return dtoList;
         }
 
-        public ResponceAction CreateOrder(OrderDto order)
+        public OrderInfoDto? GetOrderByIdAction(int id)
         {
-            return CreateOrderAction(order);
+            var order = ExecuteGetOrderByIdAction(id);
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            return MapToDto(order);
         }
 
-        public ResponceMsg UpdateOrder(OrderDto order)
+        public OrderInfoDto? UpdateOrderStatusAction(int id, OrderStatus newStatus)
         {
-            return UpdateOrderAction(order);
+            var order = ExecuteUpdateOrderStatusAction(id, newStatus);
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            return MapToDto(order);
         }
 
-        public ResponceMsg DeleteOrder(int id)
+        public OrderInfoDto CreateOrderAction(OrderCreateDto order)
         {
-            return DeleteOrderAction(id);
+            var newOrder = ExecuteCreateOrderAction(order);
+
+            return MapToDto(newOrder);
+        }
+
+        private OrderInfoDto MapToDto(OrderData order)
+        {
+            var itemsDto = new List<OrderItemInfoDto>();
+
+            foreach (var item in order.Items)
+            {
+                var itemDto = new OrderItemInfoDto()
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Price,
+                };
+
+                itemsDto.Add(itemDto);
+            }
+
+            var orderDto = new OrderInfoDto()
+            {
+                Id = order.Id,
+                UserId = order.UserId,
+                Items = itemsDto,
+                TotalPrice = order.TotalPrice,
+                DeliveryAddress = order.DeliveryAddress,
+                Status = order.Status,
+            };
+
+            return orderDto;
         }
     }
 }

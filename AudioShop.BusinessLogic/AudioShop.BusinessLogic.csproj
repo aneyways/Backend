@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AudioShop.Domain\AudioShop.Domain.csproj" />
-    <ProjectReference Include="..\AudioShop.Helpers\AudioShop.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

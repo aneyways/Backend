@@ -3,35 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.BusinessLogic.Interface;
+using AudioShop.BusinessLogic.Core.User;
+using AudioShop.BusinessLogic.Structure;
 using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.User;
+using AudioShop.Domains.Models.Auth;
 using AudioShop.Domains.Models.User;
 
 namespace AudioShop.BusinessLogic.Core.Auth
 {
     public class AuthActions
     {
+        private readonly UserActions _userActions = new();
 
-        internal bool ValidateLogin(UserAuthAction data)
+        public UserData? ExecuteUserRegisterAction(UserRegisterData registerData)
         {
-            UserData? local;
-            using (var db = new UserContext())
+            var _newUser = new UserCreateDto
             {
-                local = db.Users.FirstOrDefault(
-                        u => u.UserName == data.Login
-                             && u.Password == data.Password);
+                UserName = registerData.UserName,
+                Email = registerData.Email,
+                Password = registerData.Password
+            };
+
+            var _user = _userActions.ExecuteCreateUserAction(_newUser);
+
+            return _user;
+        }
+
+        public UserData? ExecuteUserLoginAction(UserLoginData data)
+        {
+            if (string.IsNullOrEmpty(data.Login) || string.IsNullOrEmpty(data.Password))
+            {
+                return null;
             }
 
+            var passwordHash = PasswordHasher.Hash(data.Password);
 
-            if (string.IsNullOrEmpty(data.Login) && string.IsNullOrEmpty(data.Password))
-                return false;
-            return true;
+            using (var db = new AppDbContext())
+            {
+                return db.Users.FirstOrDefault(u => (u.UserName == data.Login || u.Email == data.Login) && u.Password == passwordHash);
+            }
         }
 
-        internal string? GenToken(UserAuthAction data)
+        public string? GenerateUserToken(UserData user)
         {
-            return "TOKEN";
+            var token = new TokenService();
+            return token.GenerateToken(user.Id, user.UserName, user.Role.ToString());
         }
-
     }
 }

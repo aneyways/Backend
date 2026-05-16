@@ -1,52 +1,107 @@
-﻿using System;
+﻿using AudioShop.DataAccess.Context;
+using AudioShop.Domains.Entities.Order;
+using AudioShop.Domains.Enums;
+using AudioShop.Domains.Models.Order;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioShop.Domains.Models.Base;
-using AudioShop.Domains.Models.Order;
 
 namespace AudioShop.BusinessLogic.Core.Order
 {
-    public class OrderAction
+    public class OrderActions
     {
-        protected List<OrderDto> GetAllOrdersAction()
+        public List<OrderData> ExecuteGetAllOrdersAction()
         {
+            using (var db = new AppDbContext())
+            {
+                var orders = db.Orders
+                    .Include(o => o.Items)
+                    .ToList();
 
+                return orders;
+            }
+        }
+        public List<OrderData> ExecuteGetUserOrdersByIdAction(int userId)
+        {
+            using (var db = new AppDbContext())
+            {
+                var _UserOrders = db.Orders.Include(o => o.Items).Where(x => x.UserId == userId).ToList();
 
+                return _UserOrders;
+            }
 
-
-            return new List<OrderDto>();
         }
 
-
-        protected OrderDto GetOrderByIdAction(int id)
+        public OrderData? ExecuteGetOrderByIdAction(int id)
         {
+            using (var db = new AppDbContext())
+            {
+                var _order = db.Orders.Include(o => o.Items).FirstOrDefault(x => x.Id == id);
 
-
-
-            return new OrderDto();
+                return _order;
+            }
         }
 
-        protected ResponceAction CreateOrderAction(OrderDto order)
+        public OrderData? ExecuteUpdateOrderStatusAction(int id, OrderStatus newStatus)
         {
+            using (var db = new AppDbContext())
+            {
+                var _order = db.Orders.FirstOrDefault(x => x.Id == id);
 
+                if (_order != null)
+                {
+                    _order.Status = newStatus;
+                    _order.UpdatedAt = DateTime.Now;
+                    db.SaveChanges();
+                    return _order;
+                }
 
-            return new ResponceAction();
+                return null;
+            }
         }
 
-
-        protected ResponceMsg UpdateOrderAction(OrderDto order)
+        public OrderData ExecuteCreateOrderAction(OrderCreateDto order)
         {
-            return new ResponceMsg();
+            //should handle user's Id and IsActive 
+
+            decimal _totalPrice = 0;
+            List<OrderItemData> _items = new List<OrderItemData>();
+
+            foreach (var _item in order.Items)
+            {
+                _totalPrice += (_item.Price * _item.Quantity);
+
+                var _newItem = new OrderItemData()
+                {
+                    ProductId = _item.ProductId,
+                    Quantity = _item.Quantity,
+                    Price = _item.Price,
+                };
+
+                _items.Add(_newItem);
+            }
+
+            var _newOrder = new OrderData()
+            {
+                UserId = order.UserId,
+                Items = _items,
+                TotalPrice = _totalPrice,
+                DeliveryAddress = order.DeliveryAddress,
+                Status = OrderStatus.Pending,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            };
+
+            using (var db = new AppDbContext())
+            {
+                db.Orders.Add(_newOrder);
+                db.SaveChanges();
+            }
+
+            return _newOrder;
         }
-
-
-        protected ResponceMsg DeleteOrderAction(int id)
-        {
-
-            return new ResponceMsg();
-        }
-
     }
 }
