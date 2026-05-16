@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AudioShop.Helpers\AudioShop.Helpers.csproj" />
-  </ItemGroup>
-
 </Project>
