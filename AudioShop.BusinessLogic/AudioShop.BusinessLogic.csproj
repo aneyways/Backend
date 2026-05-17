@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AudioShop.Domain\AudioShop.Domain.csproj" />
-    <ProjectReference Include="..\AudioShop.Helpers\AudioShop.Helpers.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AudioShop.DataAccess\AudioShop.DataAccess.csproj" />
+    <ProjectReference Include="..\AudioShop.Domain\AudioShop.Domains.csproj" />
   </ItemGroup>
 
 </Project>

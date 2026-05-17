@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AudioShop.DataAccess
+namespace AudioShop.Domains.Enums.Cart
 {
-    public class DbSession
+    public enum CartStatus
     {
-        public static string ConnectionStrings { get; set; }
+        Active = 1,
+        Completed = 2,
+        Abandoned = 3,
+
     }
 }

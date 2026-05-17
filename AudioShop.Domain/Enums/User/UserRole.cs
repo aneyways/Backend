@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AudioShop.DataAccess
+namespace AudioShop.Domains.Enums.User
 {
-    public class DbSession
+    public enum UserRole
     {
-        public static string ConnectionStrings { get; set; }
+        User = 1,
+        Manager = 20,
+        Admin = 30
     }
+
 }

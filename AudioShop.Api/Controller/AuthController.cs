@@ -1,36 +1,38 @@
-using AudioShop.BusinessLogic.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AudioShop.Domains.Models.User;
+using AudioShop.BusinessLogic;
+using AudioShop.DataAccess.Context;
+using AudioShop.Domains.Models.Auth;
+using AudioShop.BusinessLogic.Interface;
 
-namespace AudioShop.Api.Controller
+namespace AudioShop.API.Controllers
 {
-	[Route("api/session")]
-	[ApiController]
-	public class AuthController : ControllerBase
-	{
+    [Route("api/session")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+        private IAuthActions _authActions;
 
-		internal IAuthActions _auth;
-		public AuthController()
-		{
-			var bl = new BusinessLogic.BusinessLogic();
-			_auth = bl.GetAuthActions();
-		}
+        public AuthController()
+        {
+            var _bl = new AudioShop.BusinessLogic.BusinessLogic();
+            _authActions = _bl.GetAuthActions();
+        }
 
+        [HttpPost("auth")]
+        public IActionResult Login([FromBody] LoginDto _login)
+        {
+            var token = _authActions.LoginAction(_login);
+            if (token == null) return Unauthorized("Invalid credentials");
+            return Ok(new { token });
+        }
 
-		[HttpGet("satus")]
-		public IActionResult Get()
-		{
-			return Ok("Session is active");
-		}
-
-		[HttpPost]
-		public IActionResult Post([FromBody] UserAuthAction data)
-		{
-			var authStatus = _auth.LoginActionFlow(data);
-
-			string token = "";
-			return Ok(token);
-		}
-	}
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] RegisterDto _register)
+        {
+            var token = _authActions.RegisterAction(_register);
+            if (token == null) return BadRequest("User already exists");
+            return Ok(new { token });
+        }
+    }
 }

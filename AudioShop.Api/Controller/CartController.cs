@@ -1,119 +1,58 @@
-﻿using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Models.Cart;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AudioShop.BusinessLogic.Interface;
+using AudioShop.Domains.Entities.Cart;
 
-namespace AudioShop.Api.Controller
+namespace AudioShop.API.Controllers
 {
     [Route("api/cart")]
     [ApiController]
+    [Authorize]
     public class CartController : ControllerBase
     {
-        private ICartActions _cart;
-
+        private ICartAction _cartActions;
         public CartController()
         {
-            var bl = new BusinessLogic.BusinessLogic();
-            _cart = bl.GetCartActions();
+            var _bl = new AudioShop.BusinessLogic.BusinessLogic();
+            _cartActions = _bl.GetCartActions();
         }
 
-        [HttpGet]
-        public IActionResult GetCart()
+        [HttpGet("{_userId}")] //get cart by user id
+        [Authorize]
+        public IActionResult GetCartByUserId(int _userId)
         {
-            var cart = _cart.GetCartAction();
+            var _cart = _cartActions.GetCartByUserIdAction(_userId);
+            if (_cart == null) return NotFound();
 
-            if (cart == null)
-            {
-                return NotFound("Cart not found");
-            }
-
-            return Ok(cart);
+            return Ok(_cart);
         }
 
-        [HttpPost("items")]
-        public IActionResult AddItemToCart([FromBody] CartItemDto item)
+        [HttpPost("{_userId}/items")]
+        [Authorize]
+        public IActionResult PostItemToCart(int _userId, [FromBody] CartItemData _item)
         {
-            if (item == null)
-            {
-                return BadRequest("Invalid cart item data");
-            }
-
-            if (item.ProductId <= 0)
-            {
-                return BadRequest("Invalid product id");
-            }
-
-            if (item.Quantity <= 0)
-            {
-                return BadRequest("Quantity must be greater than 0");
-            }
-
-            if (item.UnitPrice <= 0)
-            {
-                return BadRequest("Unit price must be greater than 0");
-            }
-
-            var updatedCart = _cart.AddItemToCartAction(item);
-
-            if (updatedCart == null)
-            {
-                return BadRequest("Item was not added to cart");
-            }
-
-            return Created("/api/cart", updatedCart);
+            var _cart = _cartActions.PostItemToCartAction(_userId, _item);
+            if (_cart == null) return BadRequest();
+            return Ok(_cart);
         }
 
-        [HttpPut("items/{itemId}")]
-        public IActionResult UpdateCartItem(int itemId, [FromBody] CartItemDto item)
+        [HttpDelete("{_userId}/items/{_itemId}")]
+        [Authorize]
+        public IActionResult DeleteCartItem(int _userId, int _itemId)
         {
-            if (item == null)
-            {
-                return BadRequest("Invalid cart item data");
-            }
-
-            if (item.Quantity <= 0)
-            {
-                return BadRequest("Quantity must be greater than 0");
-            }
-
-            if (item.UnitPrice <= 0)
-            {
-                return BadRequest("Unit price must be greater than 0");
-            }
-
-            var updatedCart = _cart.UpdateCartItemAction(itemId, item);
-
-            if (updatedCart == null)
-            {
-                return NotFound(new { Message = $"Cart item with ID {itemId} not found" });
-            }
-
-            return Ok(updatedCart);
+            var _cart = _cartActions.DeleteCartItemAction(_userId, _itemId);
+            if (_cart == null) return NotFound();
+            return Ok(_cart);
         }
 
-        [HttpDelete("items/{itemId}")]
-        public IActionResult DeleteCartItem(int itemId)
+        [HttpDelete("{_userId}")]
+        [Authorize]
+        public IActionResult ClearCart(int _userId)
         {
-            var wasDeleted = _cart.DeleteCartItemAction(itemId);
-
-            if (!wasDeleted)
-            {
-                return NotFound(new { Message = $"Cart item with ID {itemId} not found" });
-            }
-
-            return NoContent();
+            var result = _cartActions.ClearCartAction(_userId);
+            if (!result) return NotFound();
+            return Ok();
         }
 
-        [HttpDelete]
-        public IActionResult ClearCart()
-        {
-            var wasCleared = _cart.ClearCartAction();
-
-            if (!wasCleared)
-            {
-                return NotFound(new { Message = "Cart not found" });
-            }
-
-            return NoContent();
-        }
     }
 }
