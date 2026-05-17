@@ -8,7 +8,7 @@ using AudioShop.Domains.Models.Cart;
 
 namespace AudioShop.BusinessLogic.Interfaces
 {
-    public interface ICartActions
+    public interface ICartAction
     {
         public CartResponseDto GetCartByUserIdAction(int _userId);
 

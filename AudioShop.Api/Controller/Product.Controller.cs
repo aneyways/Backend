@@ -1,77 +1,144 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using AudioShop.BusinessLogic;
+using AudioShop.BusinessLogic.Core;
+using AudioShop.Domains.Models.Product;
 using AudioShop.BusinessLogic.Interfaces;
 using AudioShop.Domains.Models.Product;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace AudioShop.API.Controllers
+namespace AudioShop.Api.Controller
 {
     [Route("api/product")]
     [ApiController]
     [Authorize]
     public class ProductController : ControllerBase
     {
-        private IProductActions _productActions;
+        private IProductAction _product;
+
         public ProductController()
         {
-            var _bl = new AudioShop.BusinessLogic.BusinessLogic();
-            _productActions = _bl.GetProductActions();
+            var bl = new BusinessLogic.BusinessLogic();
+            _product = bl.GetProductAction();
         }
 
-        [HttpGet("all")]
+        [HttpGet("getAll")]
         [AllowAnonymous]
         public IActionResult GetAllProducts()
         {
-            var _products = _productActions.GetAllProductsAction();
-            return Ok(_products);
+            var products = _product.GetAllProductAction();
+            return Ok(products);
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Admin,Manager")]
-        public IActionResult CreateNewProduct(ProductCreateDto _product)
-        {
-            var _newProduct = _productActions.CreateNewProductAction(_product);
-            return Created($"/api/product/{_newProduct.Id}", _newProduct);
-        }
-
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin,Manager")]
-        public IActionResult UpdateProduct(int id, ProductCreateDto _product)
-        {
-            var _updatedProduct = _productActions.UpdateProductAction(id, _product);
-            return Ok(_updatedProduct);
-        }
-
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult DeleteProduct(int id)
-        {
-            var IsDeleted = _productActions.DeleteProductAction(id);
-            if (!IsDeleted) return NotFound();
-            return NoContent();
-        }
-
-        [HttpGet("{id}")]
+        [HttpGet("getById")]
         [AllowAnonymous]
         public IActionResult GetProductById(int id)
         {
-            var _product = _productActions.GetByIdProductAction(id);
+            if (id <= 0)
+            {
+                return BadRequest("Invalid product id");
+            }
 
-            if (_product == null) return NotFound();
+            var product = _product.GetProductByIdAction(id);
 
-            return Ok(_product);
+            if (product == null)
+            {
+                return NotFound("Product not found");
+            }
+
+            return Ok(product);
         }
 
-        [HttpGet("category/{category}")]
+        [HttpGet("category/{categoryId}")]
         [AllowAnonymous]
-        public IActionResult GetByCategory(string _category)
+        public IActionResult GetProductsByCategory(int categoryId)
         {
-            var _product = _productActions.GetByCategoryProductsAction(_category);
+            if (categoryId <= 0)
+            {
+                return BadRequest("Invalid category id");
+            }
 
-            if (_product == null) return NotFound();
+            var products = _product.GetProductsByCategoryAction(categoryId);
+            return Ok(products);
+        }
 
-            return Ok(_product);
+        [HttpGet("subcategory/{subCategoryId}")]
+        [AllowAnonymous]
+        public IActionResult GetProductsBySubCategory(int subCategoryId)
+        {
+            if (subCategoryId <= 0)
+            {
+                return BadRequest("Invalid subcategory id");
+            }
+
+            var products = _product.GetProductsBySubCategoryAction(subCategoryId);
+            return Ok(products);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("create")]
+        public IActionResult CreateProduct([FromBody] ProductCreateDto product)
+        {
+            if (product == null)
+            {
+                return BadRequest("Invalid product data");
+            }
+
+            var createdProduct = _product.CreateProductAction(product);
+
+            if (createdProduct == null)
+            {
+                return BadRequest("Category or subcategory not found");
+            }
+
+            return Created($"api/users{createdProduct.Id}", createdProduct);
+        }
+
+        [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult UpdateProduct(int id, [FromBody] ProductCreateDto product)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid product id");
+            }
+
+            if (product == null)
+            {
+                return BadRequest("Invalid product data");
+            }
+
+            if (string.IsNullOrWhiteSpace(product.Name))
+            {
+                return BadRequest("Product name is required");
+            }
+
+            var updatedProduct = _product.UpdateProductAction(id, product);
+
+            if (updatedProduct == null)
+            {
+                return BadRequest("Product not found or category/subcategory is invalid");
+            }
+
+            return Ok(updatedProduct);
+        }
+
+        [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteProduct(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid product id");
+            }
+
+            var deleted = _product.DeleteProductAction(id);
+
+            if (!deleted)
+            {
+                return NotFound("Product not found");
+            }
+
+            return NoContent();
         }
     }
 }

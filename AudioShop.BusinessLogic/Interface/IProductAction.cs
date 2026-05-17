@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AudioShop.Domains.Models.User;
+﻿using AudioShop.Domains.Models.Product;
+using AudioShop.Domains.Models.Product;
 
-namespace AudioShop.BusinessLogic.Interfaces
+namespace AudioShop.BusinessLogic.Interface
 {
-    public interface IUserActions
+    public interface IProductAction
     {
-        public List<UserResponseDto> GetAllUsersAction();
-        public UserResponseDto CreateNewUserAction(UserCreateDto _user);
-        public UserResponseDto UpdateUserAction(int id, UserCreateDto _user);
-        public bool DeleteUserAction(int id);
-        public UserResponseDto GetUserByIdAction(int id);
+        List<ProductInfoDto> GetAllProductsAction();
 
+        ProductInfoDto? GetProductByIdAction(int id);
+
+        List<ProductInfoDto> GetProductsByCategoryAction(int categoryId);
+
+        List<ProductInfoDto> GetProductsBySubCategoryAction(int subCategoryId);
+
+        ProductInfoDto? CreateProductAction(ProductCreateDto product);
+
+        ProductInfoDto? UpdateProductAction(int id, ProductCreateDto product);
+
+        bool DeleteProductAction(int id);
     }
 }

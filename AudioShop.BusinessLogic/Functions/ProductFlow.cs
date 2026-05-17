@@ -11,9 +11,9 @@ using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Functions
 {
-    public class ProductFlow : ProductActions, IProductActions
+    public class ProductFlow : ProductActions, IProductAction
     {
-        public List<ProductResponseDto> GetAllProductsAction()
+        public List<ProductResponseDto> GetAllProductAction()
         {
             var products = ExecuteGetAllProductsAction();
             List<ProductResponseDto> productsDto = new List<ProductResponseDto>();

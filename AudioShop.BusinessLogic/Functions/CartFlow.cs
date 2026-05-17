@@ -12,7 +12,7 @@ using AudioShop.Domains.Models.Cart;
 
 namespace AudioShop.BusinessLogic.Functions
 {
-    public class CartFlow : CartActions, ICartActions
+    public class CartFlow : CartActions, ICartAction
     {
         public CartResponseDto GetCartByUserIdAction(int _userId)
         {

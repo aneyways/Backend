@@ -23,7 +23,7 @@ namespace AudioShop.BusinessLogic
             return new UserFlow();
         }
 
-        public ICartActions GetCartActions()
+        public ICartAction GetCartActions()
         {
             return new CartFlow();
         }
