@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using AudioShop.BusinessLogic.Interfaces;
+using AudioShop.BusinessLogic.Interface;
 using AudioShop.Domains.Enums.Order;
 using AudioShop.Domains.Models.Order;
 

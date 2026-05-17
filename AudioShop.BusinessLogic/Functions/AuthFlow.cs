@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.BusinessLogic;
 using AudioShop.BusinessLogic.Core;
+using AudioShop.Domains.Models.Auth;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.BusinessLogic.Core;
-using AudioShop.BusinessLogic.Interfaces;
 using AudioShop.Domains.Models.Auth;
 
 namespace AudioShop.BusinessLogic.Functions

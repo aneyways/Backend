@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AudioShop.BusinessLogic;
 using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Models.Auth;
-using AudioShop.BusinessLogic.Interfaces;
+using AudioShop.BusinessLogic.Interface;
 
 namespace AudioShop.API.Controllers
 {

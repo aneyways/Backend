@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography.X509Certificates;
-using AudioShop.BusinessLogic.Core;
 using AudioShop.BusinessLogic.Functions;
-using AudioShop.BusinessLogic.Interfaces;
+using AudioShop.BusinessLogic.Interface;
 using AudioShop.BusinessLogic.Functions;
-using AudioShop.BusinessLogic.Interfaces;
+using AudioShop.BusinessLogic.Interface;
+
 
 namespace AudioShop.BusinessLogic
 {
@@ -13,12 +13,12 @@ namespace AudioShop.BusinessLogic
         {
         }
 
-        public IProductActions GetProductActions()
+        public IProductAction GetProductAction()
         {
             return new ProductFlow();
         }
 
-        public IUserActions GetUserActions()
+        public IUserAction GetUserAction()
         {
             return new UserFlow();
         }

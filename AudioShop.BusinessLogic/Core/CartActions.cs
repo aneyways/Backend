@@ -1,5 +1,8 @@
 ﻿using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.Cart;
+using Microsoft.EntityFrameworkCore;
+using AudioShop.DataAccess.Context;
+using AudioShop.Domains.Entities.Cart;
 
 namespace AudioShop.BusinessLogic.Core
 {
@@ -9,7 +12,10 @@ namespace AudioShop.BusinessLogic.Core
         {
             using (var db = new AppDbContext())
             {
-                return db.CartDatas.FirstOrDefault(c => c.UserId == _userId);
+                return db.CartDatas
+                            .Include(c => c.Items)
+                                .ThenInclude(i => i.Product)
+                            .FirstOrDefault(c => c.UserId == _userId);
             }
         }
 

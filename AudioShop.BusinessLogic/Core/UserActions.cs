@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioShop.Domains.Entities.Product;
+using AudioShop.DataAccess.Context;
+using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Entities.User;
+using AudioShop.Domains.Enums.Cart;
 using AudioShop.Domains.Models.User;
 using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.Cart;
+using AudioShop.Domains.Entities.Product;
+using AudioShop.Domains.Entities.User;
 using AudioShop.Domains.Enums.Cart;
+using AudioShop.Domains.Models.User;
 
 namespace AudioShop.BusinessLogic.Core
 {

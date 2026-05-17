@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.Domains.Enums.Order;
 using AudioShop.Domains.Models.Order;
 using AudioShop.Domains.Entities.Order;
 using AudioShop.Domains.Enums.Order;
+using AudioShop.Domains.Models.Order;
 
-namespace AudioShop.BusinessLogic.Interfaces
+namespace AudioShop.BusinessLogic.Interface
 {
     public interface IOrderActions
     {

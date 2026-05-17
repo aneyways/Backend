@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AudioShop.BusinessLogic.Core;
-using AudioShop.BusinessLogic.Interfaces;
+using AudioShop.Domains.Models.User;
+using AudioShop.BusinessLogic.Interface;
+using AudioShop.Domains.Models.Product;
 using AudioShop.Domains.Models.User;
 
 namespace AudioShop.BusinessLogic.Functions
 {
-    public class UserFlow : UserActions, IUserActions
+    public class UserFlow : UserActions, IUserAction
     {
         public List<UserResponseDto> GetAllUsersAction()
         {

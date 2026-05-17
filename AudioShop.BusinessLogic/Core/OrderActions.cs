@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using AudioShop.DataAccess.Context;
+﻿using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.Order;
 using AudioShop.Domains.Enums.Order;
 using AudioShop.Domains.Models.Order;
+using Microsoft.EntityFrameworkCore;
 
 namespace AudioShop.BusinessLogic.Core
 {

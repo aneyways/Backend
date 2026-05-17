@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AudioShop.BusinessLogic.Core;
+using AudioShop.Domains.Models.Product;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.BusinessLogic.Core;
-using AudioShop.BusinessLogic.Interfaces;
 using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Functions
 {
     public class ProductFlow : ProductActions, IProductAction
     {
-        public List<ProductResponseDto> GetAllProductAction()
+        public List<ProductResponseDto> GetAllProductsAction()
         {
             var products = ExecuteGetAllProductsAction();
             List<ProductResponseDto> productsDto = new List<ProductResponseDto>();

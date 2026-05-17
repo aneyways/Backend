@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AudioShop.Domains.Models.Auth;
 
-namespace AudioShop.BusinessLogic.Interfaces
+namespace AudioShop.BusinessLogic.Interface
 {
     public interface IAuthActions
     {

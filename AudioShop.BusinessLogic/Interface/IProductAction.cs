@@ -1,22 +1,24 @@
-﻿using AudioShop.Domains.Models.Product;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Interface
 {
     public interface IProductAction
     {
-        List<ProductInfoDto> GetAllProductsAction();
+        public List<ProductResponseDto> GetAllProductsAction();
 
-        ProductInfoDto? GetProductByIdAction(int id);
+        public ProductResponseDto CreateNewProductAction(ProductCreateDto _product);
 
-        List<ProductInfoDto> GetProductsByCategoryAction(int categoryId);
+        public ProductResponseDto UpdateProductAction(int id, ProductCreateDto _product);
 
-        List<ProductInfoDto> GetProductsBySubCategoryAction(int subCategoryId);
+        public bool DeleteProductAction(int id);
 
-        ProductInfoDto? CreateProductAction(ProductCreateDto product);
+        public ProductResponseDto GetByIdProductAction(int id);
 
-        ProductInfoDto? UpdateProductAction(int id, ProductCreateDto product);
-
-        bool DeleteProductAction(int id);
+        public List<ProductResponseDto> GetByCategoryProductsAction(string _category);
     }
 }

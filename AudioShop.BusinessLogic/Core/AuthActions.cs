@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Entities.User;
 using AudioShop.Domains.Enums.Cart;
 using AudioShop.Domains.Models.Auth;
 using AudioShop.DataAccess.Context;
+using AudioShop.Domains.Entities.Cart;
+using AudioShop.Domains.Entities.User;
+using AudioShop.Domains.Enums.Cart;
+using AudioShop.Domains.Models.Auth;
 namespace AudioShop.BusinessLogic.Core
 {
     public class AuthActions
@@ -31,7 +36,6 @@ namespace AudioShop.BusinessLogic.Core
                 UserName = _register.UserName,
                 Email = _register.Email,
                 Password = _register.Password,
-                Role = _register.Role,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 IsActive = true,

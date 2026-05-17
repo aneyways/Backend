@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.BusinessLogic.Interface;
+using AudioShop.Domains.Enums.Order;
+using AudioShop.Domains.Models.Order;
 using AudioShop.BusinessLogic.Core;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.BusinessLogic.Core;
-using AudioShop.BusinessLogic.Interfaces;
 using AudioShop.Domains.Entities.Order;
 using AudioShop.Domains.Enums.Order;
 using AudioShop.Domains.Models.Order;
 using AudioShop.Domains.Models.Product;
+
 namespace AudioShop.BusinessLogic.Functions
 {
     public class OrderFlow : OrderActions, IOrderActions
