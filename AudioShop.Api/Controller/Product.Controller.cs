@@ -3,10 +3,9 @@ using AudioShop.Domains.Models.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AudioShop.API.Attributes;
 using AudioShop.BusinessLogic;
-using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Models.Product;
+// using AudioShop.API.Attributes;
+
 
 namespace AudioShop.API.Controllers
 {
@@ -18,7 +17,7 @@ namespace AudioShop.API.Controllers
         public ProductController()
         {
             var _bl = new AudioShop.BusinessLogic.BusinessLogic();
-            _productActions = _bl.GetProductActions();
+            _productActions = _bl.GetProductAction();
         }
 
         [HttpGet("all")]
@@ -29,7 +28,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPost]
-        [ManagerMod]
+        // [ManagerMod]
         public IActionResult CreateNewProduct(ProductCreateDto _product)
         {
             var _newProduct = _productActions.CreateNewProductAction(_product);
@@ -37,7 +36,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [ManagerMod]
+        // [ManagerMod]
         public IActionResult UpdateProduct(int id, ProductCreateDto _product)
         {
             var _updatedProduct = _productActions.UpdateProductAction(id, _product);
@@ -45,7 +44,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [AdminMod]
+        // [AdminMod]
         public IActionResult DeleteProduct(int id)
         {
             var IsDeleted = _productActions.DeleteProductAction(id);

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AudioShop.BusinessLogic.Interface;
+using AudioShop.Domains.Models.Cart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Entities.Cart;
 
 namespace AudioShop.API.Controllers
 {
@@ -29,7 +29,7 @@ namespace AudioShop.API.Controllers
 
         [HttpPost("{_userId}/items")]
         [Authorize]
-        public IActionResult PostItemToCart(int _userId, [FromBody] CartItemData _item)
+        public IActionResult PostItemToCart(int _userId, [FromBody] CartItemDto _item)
         {
             var _cart = _cartActions.PostItemToCartAction(_userId, _item);
             if (_cart == null) return BadRequest();

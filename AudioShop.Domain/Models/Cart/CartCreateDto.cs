@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioShop.Domains.Enums.Cart;
 using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Enums.Cart;
 

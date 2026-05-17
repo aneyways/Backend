@@ -1,8 +1,6 @@
 ﻿using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.Cart;
 using Microsoft.EntityFrameworkCore;
-using AudioShop.DataAccess.Context;
-using AudioShop.Domains.Entities.Cart;
 
 namespace AudioShop.BusinessLogic.Core
 {

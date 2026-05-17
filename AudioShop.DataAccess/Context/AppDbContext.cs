@@ -9,10 +9,6 @@ using AudioShop.Domains.Entities.Order;
 using AudioShop.Domains.Entities.Product;
 using AudioShop.Domains.Entities.User;
 using Microsoft.EntityFrameworkCore;
-using AudioShop.Domains.Entities.Cart;
-using AudioShop.Domains.Entities.Order;
-using AudioShop.Domains.Entities.Product;
-using AudioShop.Domains.Entities.User;
 
 namespace AudioShop.DataAccess.Context
 {
@@ -25,7 +21,7 @@ namespace AudioShop.DataAccess.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DbSession.ConnectionString);
+                optionsBuilder.UseSqlServer(DbSession.ConnectionStrings);
             }
         }
 

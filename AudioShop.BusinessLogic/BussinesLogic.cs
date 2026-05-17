@@ -1,8 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using AudioShop.BusinessLogic.Functions;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.BusinessLogic.Functions;
-using AudioShop.BusinessLogic.Interface;
 
 
 namespace AudioShop.BusinessLogic

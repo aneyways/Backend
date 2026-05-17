@@ -1,16 +1,13 @@
-﻿using AudioShop.API.Attributes;
-using AudioShop.BusinessLogic.Interface;
+﻿using AudioShop.BusinessLogic.Interface;
 using AudioShop.Domains.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AudioShop.API.Attributes;
 using AudioShop.BusinessLogic;
 using AudioShop.BusinessLogic.Core;
 using AudioShop.BusinessLogic.Functions;
-using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Models.User;
-
+// using AudioShop.API.Attributes;
+// using AudioShop.API.Attributes;
 
 namespace AudioShop.API.Controllers
 {
@@ -26,7 +23,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("all")]
-        [AdminMod]
+        // [AdminMod]
         public IActionResult GetAllUsers()
         {
             var _users = _userAction.GetAllUsersAction();
@@ -34,15 +31,15 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPost]
-        [AdminMod]
+        // [AdminMod]
         public IActionResult CreateNewUser(UserCreateDto _user)
         {
-            var _newUser = _userAction.CreateUserAction(_user);
+            var _newUser = _userAction.CreateNewUserAction(_user);
             return Created($"/api/user/{_newUser.Id}", _newUser);
         }
 
         [HttpPut("{id}")]
-        [UserMod]
+        // [UserMod]
         public IActionResult UpdateUser(int id, UserCreateDto _user)
         {
             var _updatedUser = _userAction.UpdateUserAction(id, _user);
@@ -53,7 +50,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [AdminMod]
+        // [AdminMod]
         public IActionResult DeleteUser(int id)
         {
             var IsDeleted = _userAction.DeleteUserAction(id);
@@ -64,7 +61,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [UserMod]
+        // [UserMod]
         public IActionResult GetUserById(int id)
         {
             var _user = _userAction.GetUserByIdAction(id);

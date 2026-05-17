@@ -4,9 +4,6 @@ using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.Product;
 using AudioShop.Domains.Models.Product;
 using Microsoft.EntityFrameworkCore;
-using AudioShop.DataAccess.Context;
-using AudioShop.Domains.Entities.Product;
-using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Core
 {

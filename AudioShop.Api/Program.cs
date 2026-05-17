@@ -2,10 +2,9 @@
 using AudioShop.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using AudioShop.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
-DbSession.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+DbSession.ConnectionStrings = builder.Configuration.GetConnectionString("DefaultConnection");
 
 
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -69,6 +68,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
