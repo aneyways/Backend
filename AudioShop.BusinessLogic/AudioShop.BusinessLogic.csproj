@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AudioShop.DataAccess\AudioShop.DataAccess.csproj" />
+    <ProjectReference Include="..\AudioShop.Domain\AudioShop.Domains.csproj" />
+  </ItemGroup>
+
 </Project>

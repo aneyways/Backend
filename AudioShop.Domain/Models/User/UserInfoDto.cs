@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AudioShop.Domains.Enums.User;
+using AudioShop.Domains.Enums;
+
+namespace AudioShop.Domains.Models.User
+{
+    public class UserInfoDto
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public GenderTypes Gender { get; set; }
+    }
+}

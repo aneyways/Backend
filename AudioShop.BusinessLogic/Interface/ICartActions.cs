@@ -1,15 +1,21 @@
-﻿using AudioShop.Domains.Entities.Cart;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Models.Cart;
 
-namespace AudioShop.BusinessLogic.Interface
+namespace AudioShop.BusinessLogic.Interfaces
 {
     public interface ICartActions
     {
-        CartDto? GetCartAction();
-        CartDto? AddItemToCartAction(CartItemDto item);
-        CartDto? UpdateCartItemAction(int itemId, CartItemDto item);
-        bool DeleteCartItemAction(int itemId);
-        bool ClearCartAction();
+        public CartResponseDto GetCartByUserIdAction(int _userId);
 
+        public CartResponseDto PostItemToCartAction(int _userId, CartItemData _item);
+
+        public CartResponseDto DeleteCartItemAction(int _userId, int _itemId);
+
+        public bool ClearCartAction(int _userId);
     }
 }

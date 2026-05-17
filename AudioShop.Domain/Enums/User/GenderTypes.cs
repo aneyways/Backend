@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AudioShop.DataAccess
+namespace AudioShop.Domains.Enums.User
 {
-    public class DbSession
+    public enum GenderTypes
     {
-        public static string ConnectionStrings { get; set; }
+        None = 0,
+        Woman = 1,
+        Man = 2,
     }
 }

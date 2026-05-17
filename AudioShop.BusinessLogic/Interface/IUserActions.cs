@@ -1,10 +1,11 @@
-﻿using AudioShop.Domains.Entities.User;
-using AudioShop.Domains.Models.User;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.Domains.Models.User;
+using AudioShop.Domains.Entities.User;
+using AudioShop.Domains.Models.User;
 
 namespace AudioShop.BusinessLogic.Interface
 {

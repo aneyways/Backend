@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AudioShop.Api.Controller
+namespace AudioShop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class HealthController : ControllerBase
     {
-        [HttpGet ("ping")]
-        public IActionResult Ping()
+        [HttpGet("ping")]
+        public IActionResult Get()
         {
-            return Ok("pong");
-        }   
+            return Ok();
+        }
+
     }
 }

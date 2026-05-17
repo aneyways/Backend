@@ -1,23 +1,20 @@
-﻿using AudioShop.Domains.Entities.Order;
-using AudioShop.Domains.Enums;
-using AudioShop.Domains.Models.Order;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.Domains.Models.Order;
+using AudioShop.Domains.Entities.Order;
+using AudioShop.Domains.Enums.Order;
 
-namespace AudioShop.BusinessLogic.Interface
+namespace AudioShop.BusinessLogic.Interfaces
 {
     public interface IOrderActions
     {
-        public List<OrderInfoDto> GetAllOrdersAction();
-        public List<OrderInfoDto> GetUserOrdersByIdAction(int userId);
+        public List<OrderResponseDto> GetAllOrdersOfUserAction(int _userId);
+        public OrderResponseDto CreateOrderAction(OrderCreateDto _order);
+        public OrderResponseDto UpdateOrderStatusAction(int _orderId, OrderStatus _status);
+        public bool DeleteOrderAction(int _orderId);
 
-        public OrderInfoDto? GetOrderByIdAction(int id);
-
-        public OrderInfoDto? UpdateOrderStatusAction(int id, OrderStatus newStatus);
-
-        public OrderInfoDto CreateOrderAction(OrderCreateDto order);
     }
 }

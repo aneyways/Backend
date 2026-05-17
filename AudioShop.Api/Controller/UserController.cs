@@ -1,73 +1,75 @@
-﻿using AudioShop.Api.Domain; 
-using Microsoft.AspNetCore.Http;    
-using Microsoft.AspNetCore.Mvc; 
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using AudioShop.BusinessLogic.Core;
+using AudioShop.BusinessLogic.Interfaces;
+using AudioShop.Domains.Models.User;
+using AudioShop.BusinessLogic;
+using AudioShop.BusinessLogic.Functions;
+using Microsoft.AspNetCore.Authorization;
 
 
-namespace AudioShop.Api.Controller
-{ 
-    [Route("api/user")] 
-    [ApiController] 
-
-
-    public class UserController : ControllerBase    
+namespace AudioShop.API.Controllers
+{
+    [Route("api/user")]
+    [ApiController]
+    [Authorize]
+    public class UserController : ControllerBase
     {
-        public static List<User> _users = new();  
-        public static int NextId = 1;
+        private IUserActions _userActions;
 
-        [HttpGet("all")] 
-        public IActionResult GetAllUsers() 
+        public UserController()
         {
+            var _bl = new AudioShop.BusinessLogic.BusinessLogic();
+            _userActions = _bl.GetUserActions();
+        }
+
+        [HttpGet("all")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAllUsers()
+        {
+            var _users = _userActions.GetAllUsersAction();
             return Ok(_users);
         }
-        
-        [HttpGet("{id}")]
-        public IActionResult GetUserById(int id) 
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult CreateNewUser(UserCreateDto _user)
         {
-            var user = _users.FirstOrDefault(u => u.Id == id);
-            if (user == null) 
-            {
-                return NotFound(new { Message = $"User with {id} not found" });
-            }
-            return Ok(user);
+            var _newUser = _userActions.CreateNewUserAction(_user);
+            return Created($"/api/user/{_newUser.Id}", _newUser);
         }
 
-        [HttpPost("create")]    
-        public IActionResult CreateUser([FromBody] User user) 
+        [HttpPut("{id}")]
+        [Authorize]
+        public IActionResult UpdateUser(int id, UserCreateDto _user)
         {
-          
-            user.Id = NextId++;
-            user.CreatedAt = DateTime.UtcNow;
-            _users.Add(user);
-            return Created( $"/api/user/{user.Id}", user );
-        }   
+            var _updatedUser = _userActions.UpdateUserAction(id, _user);
 
-            [HttpPut("{id}")]    
-           public IActionResult UpdateUser(int id, [FromBody] User updatedUser)
-        {   
-            var existinguser = _users.FirstOrDefault(u => u.Id == id);
-            
-            if (existinguser == null) 
-            {
-                return NotFound(new { Message = $"User with {id} not found" });
-            }
-            existinguser.Username = updatedUser.Username;
-            existinguser.Email = updatedUser.Email;
-            
-            return Ok(existinguser);
-            }
+            if (_updatedUser == null) return NotFound();
+
+            return Ok(_updatedUser);
+        }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id) 
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteUser(int id)
         {
-            var user = _users.FirstOrDefault(u => u.Id == id);
-            if (user == null) 
-            {
-                return NotFound(new { Message = $"User with {id} not found" });
-            }
-            _users.Remove(user);
+            var IsDeleted = _userActions.DeleteUserAction(id);
+
+            if (!IsDeleted) return NotFound();
+
             return NoContent();
         }
 
+        [HttpGet("{id}")]
+        [Authorize]
+        public IActionResult GetUserById(int id)
+        {
+            var _user = _userActions.GetUserByIdAction(id);
 
+            if (_user == null) return NotFound();
+
+            return Ok(_user);
+        }
     }
 }

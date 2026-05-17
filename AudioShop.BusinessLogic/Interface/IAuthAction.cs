@@ -1,19 +1,15 @@
-﻿using AudioShop.Domains.Models.Auth;
-using AudioShop.Domains.Models.Base;
-using AudioShop.Domains.Models.User;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AudioShop.Domains.Models.Auth;
 
-namespace AudioShop.BusinessLogic.Interface
+namespace AudioShop.BusinessLogic.Interfaces
 {
     public interface IAuthActions
     {
-
-        public ResponseAction UserRegisterAction(UserRegisterData data);
-
-        public ResponseAction UserLoginAction(UserLoginData auth);
+        public string LoginAction(LoginDto _login);
+        public string RegisterAction(RegisterDto _register);
     }
 }
