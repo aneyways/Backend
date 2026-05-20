@@ -29,7 +29,6 @@ namespace AudioShop.BusinessLogic.Core
                 Password = _user.Password,
                 DefaultPaymentMethod = _user.DefaultPaymentMethod,
                 DOB = _user.DOB,
-                Gender = _user.Gender,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 IsActive = true,

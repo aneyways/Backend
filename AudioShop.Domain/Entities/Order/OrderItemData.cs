@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AudioShop.Domains.Entities.Order;
 using AudioShop.Domains.Entities.Product;
-using AudioShop.Domains.Entities.Product;
 
 namespace AudioShop.Domains.Entities.Order
 {

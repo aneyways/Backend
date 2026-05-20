@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AudioShop.Domains.Entities.User;
 using Microsoft.IdentityModel.Tokens;
-using AudioShop.Domains.Entities.User;
 
 namespace AudioShop.BusinessLogic
 {

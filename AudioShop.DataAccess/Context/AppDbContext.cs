@@ -1,39 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AudioShop.DataAccess;
+﻿using AudioShop.DataAccess;
+using AudioShop.Domains.Entities.Address;
 using AudioShop.Domains.Entities.Cart;
+using AudioShop.Domains.Entities.Category;
 using AudioShop.Domains.Entities.Order;
 using AudioShop.Domains.Entities.Product;
 using AudioShop.Domains.Entities.User;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AudioShop.DataAccess.Context
 {
     public class AppDbContext : DbContext
     {
-
-        public AppDbContext() : base() { }
-
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        { }
+        public AppDbContext() : base()
+        { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DbSession.ConnectionStrings);
+                optionsBuilder.UseSqlServer("Server=localhost;Database=AudioShop;Trusted_Connection=True;TrustServerCertificate=True;");
             }
         }
 
-
         public DbSet<ProductData> ProductDatas { get; set; }
-        public DbSet<UserData> UserDatas { get; set; }
+        public DbSet<ProductImgData> ProductImages { get; set; }
+        public DbSet<ProductDescriptionData> ProductDescriptions { get; set; }
         public DbSet<OrderData> OrderDatas { get; set; }
         public DbSet<OrderItemData> OrderItemDatas { get; set; }
         public DbSet<CartData> CartDatas { get; set; }
         public DbSet<CartItemData> CartItemDatas { get; set; }
+        public DbSet<UserData> UserDatas { get; set; }
+        public DbSet<AddressData> AddressDatas { get; set; }
+        public DbSet<CategoryData> Categories { get; set; }
+        public DbSet<SubCategoryData> SubCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<CartData>()
                 .HasOne(c => c.User)
@@ -65,8 +73,6 @@ namespace AudioShop.DataAccess.Context
                .WithMany()
                .HasForeignKey(oi => oi.ProductId);
 
-
-
             modelBuilder.Entity<CartData>()
                 .Property(c => c.TotalPrice)
                 .HasPrecision(18, 2);
@@ -85,6 +91,10 @@ namespace AudioShop.DataAccess.Context
 
             modelBuilder.Entity<OrderItemData>()
                 .Property(oi => oi.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<OrderItemData>()
+                .Property(oi => oi.UnitPrice)
                 .HasPrecision(18, 2);
 
             modelBuilder.Entity<ProductData>()

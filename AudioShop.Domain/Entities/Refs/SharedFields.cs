@@ -10,6 +10,5 @@ namespace AudioShop.Domains.Entities.Refs
     {
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
     }
 }

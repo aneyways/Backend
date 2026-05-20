@@ -29,7 +29,7 @@ namespace AudioShop.BusinessLogic.Core
                 }).ToList(),
 
                 TotalPrice = _order.Items.Sum(i => i.Price * i.Quantity),
-                Status = OrderStatus.New,
+                Status = OrderStatus.Pending,
             };
             _db.OrderDatas.Add(newOrder);
             _db.SaveChanges();

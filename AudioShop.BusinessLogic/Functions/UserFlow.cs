@@ -38,9 +38,7 @@ namespace AudioShop.BusinessLogic.Functions
             {
                 Id = newUser.Id,
                 UserName = newUser.UserName,
-                Email = newUser.Email,
-                Gender = newUser.Gender,
-
+                Email = newUser.Email
             };
             return newUserDto;
         }
@@ -53,8 +51,7 @@ namespace AudioShop.BusinessLogic.Functions
             {
                 Id = updatedUser.Id,
                 UserName = updatedUser.UserName,
-                Email = updatedUser.Email,
-                Gender = updatedUser.Gender,
+                Email = updatedUser.Email
             };
 
             return updatedUserDto;
@@ -75,8 +72,7 @@ namespace AudioShop.BusinessLogic.Functions
             {
                 Id = foundUser.Id,
                 UserName = foundUser.UserName,
-                Email = foundUser.Email,
-                Gender = foundUser.Gender,
+                Email = foundUser.Email
             };
 
             return foundUserDto;
