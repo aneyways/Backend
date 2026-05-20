@@ -1,16 +1,14 @@
-﻿using System;
+﻿using AudioShop.Domains.Entities.Cart;
+using AudioShop.Domains.Entities.Category;
+using AudioShop.Domains.Entities.Order;
+using AudioShop.Domains.Entities.Refs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioShop.Domains.Entities.Cart;
-using AudioShop.Domains.Entities.Order;
-using AudioShop.Domains.Entities.Refs;
-using AudioShop.Domains.Entities.Cart;
-using AudioShop.Domains.Entities.Order;
-using AudioShop.Domains.Entities.Refs;
 
 namespace AudioShop.Domains.Entities.Product
 {
@@ -34,5 +32,9 @@ namespace AudioShop.Domains.Entities.Product
 
         [InverseProperty("Product")]
         public List<OrderItemData> OrderItems { get; set; } = new List<OrderItemData>();
+        public int? SubCategoryId { get; set; }
+
+        [ForeignKey("SubCategoryId")]
+        public SubCategoryData? SubCategory { get; set; }
     }
 }
