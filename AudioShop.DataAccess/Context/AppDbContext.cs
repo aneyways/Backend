@@ -100,6 +100,12 @@ namespace AudioShop.DataAccess.Context
             modelBuilder.Entity<ProductData>()
                 .Property(p => p.Price)
                 .HasPrecision(18, 2);
+
+            modelBuilder.Entity<ProductData>()
+            .HasOne(p => p.Category)
+            .WithMany(c => c.Products)
+            .HasForeignKey(p => p.CategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

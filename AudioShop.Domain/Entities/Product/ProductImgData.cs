@@ -5,6 +5,8 @@ namespace AudioShop.Domains.Entities.Product
 {
     public class ProductImgData
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]

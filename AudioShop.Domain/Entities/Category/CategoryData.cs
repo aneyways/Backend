@@ -14,7 +14,7 @@ namespace AudioShop.Domains.Entities.Category
         [Required]
         [StringLength(100)]
         public string Name { get; set; } = string.Empty;
-
         public List<SubCategoryData>? SubCategories { get; set; }
+        public List<ProductData>? Products { get; set; }
     }
 }

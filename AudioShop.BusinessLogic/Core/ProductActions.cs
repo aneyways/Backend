@@ -23,7 +23,7 @@ namespace AudioShop.BusinessLogic.Core
                 Name = _product.Name,
                 Description = _product.Description,
                 Price = _product.Price,
-                Category = _product.Category,
+                CategoryId = _product.CategoryId,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
             };
@@ -31,7 +31,13 @@ namespace AudioShop.BusinessLogic.Core
             _db.SaveChanges();
             return newProduct;
         }
-
+        public List<ProductData> ExecuteGetByCategoryProductsAction(string category)
+        {
+            return _db.ProductDatas
+                .Include(p => p.Category)
+                .Where(p => p.Category.Name.Contains(category))
+                .ToList();
+        }
         public ProductData ExecuteUpdateProductAction(int id, ProductCreateDto _product)
         {
             var product = _db.ProductDatas.FirstOrDefault(p => p.Id == id);
@@ -56,13 +62,6 @@ namespace AudioShop.BusinessLogic.Core
         public ProductData ExecuteGetByIdProductAction(int id)
         {
             return _db.ProductDatas.FirstOrDefault(p => p.Id == id);
-        }
-
-        public List<ProductData> ExecuteGetByCategoryProductsAction(string category)
-        {
-            return _db.ProductDatas
-                .Where(p => p.Category.Contains(category))
-                .ToList();
         }
     }
 }

@@ -2,13 +2,9 @@
 using AudioShop.Domains.Entities.Category;
 using AudioShop.Domains.Entities.Order;
 using AudioShop.Domains.Entities.Refs;
-using System;
-using System.Collections.Generic;
+using AudioShop.Domains.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AudioShop.Domains.Entities.Product
 {
@@ -24,9 +20,10 @@ namespace AudioShop.Domains.Entities.Product
         [StringLength(500, MinimumLength = 1)]
         public string Description { get; set; }
         public decimal Price { get; set; }
+
         [Required]
-        [StringLength(100, MinimumLength = 1)]
-        public string Category { get; set; }
+        [StringLength(100, MinimumLength = 1)   ]
+
         [InverseProperty("Product")]
         public List<CartItemData> CartItems { get; set; } = new List<CartItemData>();
 
@@ -36,5 +33,13 @@ namespace AudioShop.Domains.Entities.Product
 
         [ForeignKey("SubCategoryId")]
         public SubCategoryData? SubCategory { get; set; }
+        public int CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public CategoryData? Category { get; set; }
+
+        [InverseProperty("Product")]
+        public List<ProductImgData> Images { get; set; } = new();
+
     }
 }
