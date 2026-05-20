@@ -9,8 +9,7 @@ namespace AudioShop.Domains.Enums.User
     public enum UserRole
     {
         User = 1,
-        Manager = 20,
-        Admin = 30
+        Admin = 2
     }
 
 }
