@@ -7,7 +7,6 @@ using AudioShop.BusinessLogic;
 using AudioShop.BusinessLogic.Core;
 using AudioShop.Domains.Models.Auth;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Models.Auth;
 
 namespace AudioShop.BusinessLogic.Functions
 {

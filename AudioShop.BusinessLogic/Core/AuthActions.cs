@@ -8,11 +8,8 @@ using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Entities.User;
 using AudioShop.Domains.Enums.Cart;
 using AudioShop.Domains.Models.Auth;
-using AudioShop.DataAccess.Context;
-using AudioShop.Domains.Entities.Cart;
-using AudioShop.Domains.Entities.User;
-using AudioShop.Domains.Enums.Cart;
-using AudioShop.Domains.Models.Auth;
+using AudioShop.Domains.Enums.User;
+
 namespace AudioShop.BusinessLogic.Core
 {
     public class AuthActions
@@ -36,6 +33,7 @@ namespace AudioShop.BusinessLogic.Core
                 UserName = _register.UserName,
                 Email = _register.Email,
                 Password = _register.Password,
+                Role = UserRole.User,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 IsActive = true,
@@ -53,6 +51,11 @@ namespace AudioShop.BusinessLogic.Core
             _db.SaveChanges();
 
             return newUser;
+        }
+        public string? GenerateUserToken(UserData user)
+        {
+            var token = new TokenService();
+            return token.GenerateToken(user);
         }
     }
 }

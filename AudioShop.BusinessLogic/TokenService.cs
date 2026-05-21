@@ -12,8 +12,8 @@ namespace AudioShop.BusinessLogic
 {
     public class TokenService
     {
-        private const string Issuer = "TKDequipApi";
-        private const string Audience = "TKDequipClients";
+        private const string Issuer = "AudioShopApi";
+        private const string Audience = "AudioShopClients";
         private const string SecretKey = "tw_curs2026_super_secret_min_32_caractere!";
 
         public string GenerateToken(UserData user)

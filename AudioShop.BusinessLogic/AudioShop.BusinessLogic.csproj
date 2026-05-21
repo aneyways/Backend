@@ -15,4 +15,8 @@
     <ProjectReference Include="..\AudioShop.Domain\AudioShop.Domains.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Structure\" />
+  </ItemGroup>
+
 </Project>
