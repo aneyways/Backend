@@ -19,7 +19,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("{_userId}")]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAllOrdersOfUser(int _userId)
         {
             var _orders = _orderActions.GetAllOrdersOfUserAction(_userId);
@@ -36,7 +36,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPut("{_orderId}/status")]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin")]
         public IActionResult UpdateOrderStatus(int _orderId, [FromBody] OrderStatus _status)
         {
             var order = _orderActions.UpdateOrderStatusAction(_orderId, _status);

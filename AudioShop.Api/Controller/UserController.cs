@@ -21,7 +21,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("all")]
-        // [AdminMod]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAllUsers()
         {
             var _users = _userAction.GetAllUsersAction();
@@ -29,7 +29,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPost]
-        // [AdminMod]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateNewUser(UserCreateDto _user)
         {
             var _newUser = _userAction.CreateNewUserAction(_user);
@@ -37,7 +37,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPut("{id}")]
-        // [UserMod]
+        [Authorize]
         public IActionResult UpdateUser(int id, UserCreateDto _user)
         {
             var _updatedUser = _userAction.UpdateUserAction(id, _user);
@@ -48,7 +48,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        // [AdminMod]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteUser(int id)
         {
             var IsDeleted = _userAction.DeleteUserAction(id);
@@ -59,7 +59,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("{id}")]
-        // [UserMod]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetUserById(int id)
         {
             var _user = _userAction.GetUserByIdAction(id);

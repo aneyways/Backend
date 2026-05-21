@@ -10,6 +10,7 @@ namespace AudioShop.API.Controllers
 {
     [Route("api/product")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private IProductActions _productActions;
@@ -20,6 +21,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("all")]
+        [AllowAnonymous]
         public IActionResult GetAllProducts()
         {
             var _products = _productActions.GetAllProductsAction();
@@ -27,7 +29,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPost]
-        // [ManagerMod]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateNewProduct(ProductCreateDto _product)
         {
             var _newProduct = _productActions.CreateNewProductAction(_product);
@@ -35,7 +37,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpPut("{id}")]
-        // [ManagerMod]
+        [Authorize(Roles = "Admin")]
         public IActionResult UpdateProduct(int id, ProductCreateDto _product)
         {
             var _updatedProduct = _productActions.UpdateProductAction(id, _product);
@@ -43,7 +45,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        // [AdminMod]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteProduct(int id)
         {
             var IsDeleted = _productActions.DeleteProductAction(id);
@@ -52,6 +54,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetProductById(int id)
         {
             var _product = _productActions.GetByIdProductAction(id);
@@ -62,6 +65,7 @@ namespace AudioShop.API.Controllers
         }
 
         [HttpGet("category/{category}")]
+        [AllowAnonymous]
         public IActionResult GetByCategory(string _category)
         {
             var _product = _productActions.GetByCategoryProductsAction(_category);
