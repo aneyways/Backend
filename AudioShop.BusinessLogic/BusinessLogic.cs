@@ -37,6 +37,10 @@ namespace AudioShop.BusinessLogic
         {
             return new CategoryFlow();
         }
+        public ISubCategoryAction GetSubCategoryActions()
+        {
+            return new SubCategoryFlow();
+        }
 
     }
 }

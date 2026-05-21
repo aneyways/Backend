@@ -1,7 +1,7 @@
 ﻿
 namespace AudioShop.Domains.Models.Category
 {
-    public class SubCategoryInfoDto
+    public class SubCategoryResponseDto
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
