@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using AudioShop.BusinessLogic;
 using AudioShop.BusinessLogic.Core;
 using AudioShop.BusinessLogic.Functions;
-// using AudioShop.API.Attributes;
-// using AudioShop.API.Attributes;
 
 namespace AudioShop.API.Controllers
 {
@@ -15,7 +13,7 @@ namespace AudioShop.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserAction _userAction;
+        private IUserActions _userAction;
         public UserController()
         {
             var _bl = new AudioShop.BusinessLogic.BusinessLogic();

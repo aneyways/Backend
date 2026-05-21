@@ -10,7 +10,7 @@ using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Functions
 {
-    public class UserFlow : UserActions, IUserAction
+    public class UserFlow : UserActions, IUserActions
     {
         public List<UserResponseDto> GetAllUsersAction()
         {

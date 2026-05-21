@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using AudioShop.Domains.Enums.Order;
 using AudioShop.Domains.Models.Order;
 using AudioShop.Domains.Entities.Order;
-using AudioShop.Domains.Enums.Order;
-using AudioShop.Domains.Models.Order;
 
 namespace AudioShop.BusinessLogic.Interface
 {

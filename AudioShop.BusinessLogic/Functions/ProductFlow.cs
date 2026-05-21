@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 using AudioShop.BusinessLogic.Core;
 using AudioShop.Domains.Models.Product;
 using AudioShop.BusinessLogic.Interface;
-using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Functions
 {
-    public class ProductFlow : ProductActions, IProductAction
+    public class ProductFlow : ProductActions, IProductActions
     {
         public List<ProductResponseDto> GetAllProductsAction()
         {

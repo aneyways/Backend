@@ -8,20 +8,18 @@ namespace AudioShop.BusinessLogic
     public class BusinessLogic
     {
         public BusinessLogic()
-        {
-        }
-
-        public IProductAction GetProductAction()
+        {}
+        public IProductActions GetProductAction()
         {
             return new ProductFlow();
         }
 
-        public IUserAction GetUserAction()
+        public IUserActions GetUserAction()
         {
             return new UserFlow();
         }
 
-        public ICartAction GetCartActions()
+        public ICartActions GetCartActions()
         {
             return new CartFlow();
         }
@@ -35,6 +33,10 @@ namespace AudioShop.BusinessLogic
             return new AuthFlow();
         }
 
+        public ICategoryActions GetCategoryActions()
+        {
+            return new CategoryFlow();
+        }
 
     }
 }

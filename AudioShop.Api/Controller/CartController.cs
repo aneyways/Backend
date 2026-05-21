@@ -10,7 +10,7 @@ namespace AudioShop.API.Controllers
     [Authorize]
     public class CartController : ControllerBase
     {
-        private ICartAction _cartActions;
+        private ICartActions _cartActions;
         public CartController()
         {
             var _bl = new AudioShop.BusinessLogic.BusinessLogic();

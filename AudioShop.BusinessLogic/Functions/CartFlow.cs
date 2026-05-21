@@ -1,14 +1,11 @@
 ﻿using AudioShop.BusinessLogic.Core;
-using AudioShop.Domains.Entities.Cart;
-using AudioShop.Domains.Models.Cart;
-using AudioShop.BusinessLogic.Core;
 using AudioShop.BusinessLogic.Interface;
 using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Models.Cart;
 
 namespace AudioShop.BusinessLogic.Functions
 {
-    public class CartFlow : CartActions, ICartAction
+    public class CartFlow : CartActions, ICartActions
     {
         public CartResponseDto GetCartByUserIdAction(int _userId)
         {

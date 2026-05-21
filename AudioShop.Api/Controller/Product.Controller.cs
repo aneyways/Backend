@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AudioShop.BusinessLogic;
-// using AudioShop.API.Attributes;
 
 
 namespace AudioShop.API.Controllers
@@ -13,7 +12,7 @@ namespace AudioShop.API.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private IProductAction _productActions;
+        private IProductActions _productActions;
         public ProductController()
         {
             var _bl = new AudioShop.BusinessLogic.BusinessLogic();

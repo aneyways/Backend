@@ -7,7 +7,7 @@ using AudioShop.Domains.Models.User;
 
 namespace AudioShop.BusinessLogic.Interface
 {
-    public interface IUserAction
+    public interface IUserActions
     {
         public List<UserResponseDto> GetAllUsersAction();
         public UserResponseDto CreateNewUserAction(UserCreateDto _user);

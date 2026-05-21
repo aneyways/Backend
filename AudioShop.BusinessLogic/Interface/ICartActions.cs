@@ -1,10 +1,9 @@
 ﻿using AudioShop.Domains.Models.Cart;
 using AudioShop.Domains.Entities.Cart;
-using AudioShop.Domains.Models.Cart;
 
 namespace AudioShop.BusinessLogic.Interface
 {
-    public interface ICartAction
+    public interface ICartActions
     {
         public CartResponseDto GetCartByUserIdAction(int _userId);
 

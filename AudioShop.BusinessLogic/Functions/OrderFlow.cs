@@ -7,10 +7,7 @@ using AudioShop.BusinessLogic.Interface;
 using AudioShop.Domains.Enums.Order;
 using AudioShop.Domains.Models.Order;
 using AudioShop.BusinessLogic.Core;
-using AudioShop.BusinessLogic.Interface;
 using AudioShop.Domains.Entities.Order;
-using AudioShop.Domains.Enums.Order;
-using AudioShop.Domains.Models.Order;
 using AudioShop.Domains.Models.Product;
 
 namespace AudioShop.BusinessLogic.Functions
