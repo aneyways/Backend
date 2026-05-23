@@ -74,5 +74,23 @@ namespace AudioShop.API.Controllers
 
             return Ok(_product);
         }
+
+        [HttpPost("{id}/image")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddProductImage(int id, [FromBody] ProductImageDto _image)
+        {
+            var result = _productActions.AddProductImageAction(id, _image.Url);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpPut("{id}/image")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult UpdateProductImage(int id, [FromBody] ProductImageDto _image)
+        {
+            var result = _productActions.UpdateProductImageAction(id, _image.Url);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
     }
 }

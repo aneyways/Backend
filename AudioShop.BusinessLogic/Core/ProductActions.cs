@@ -63,5 +63,51 @@ namespace AudioShop.BusinessLogic.Core
         {
             return _db.ProductDatas.FirstOrDefault(p => p.Id == id);
         }
+
+        public ProductData ExecuteAddProductImageAction(int productId, string url)
+        {
+            var product = _db.ProductDatas
+                .Include(p => p.Images)
+                .Include(p => p.Category)
+                .FirstOrDefault(p => p.Id == productId);
+
+            if (product == null) return null;
+
+            var image = new ProductImgData
+            {
+                Url = url,
+                ProductId = productId
+            };
+
+            _db.ProductImages.Add(image);
+            _db.SaveChanges();
+
+            return product;
+        }
+
+        public ProductData ExecuteUpdateProductImageAction(int productId, string url)
+        {
+            var product = _db.ProductDatas
+                .Include(p => p.Images)
+                .Include(p => p.Category)
+                .FirstOrDefault(p => p.Id == productId);
+            if (product == null) return null;
+
+            var existingImage = product.Images?.FirstOrDefault();
+            if (existingImage != null)
+            {
+                existingImage.Url = url;
+            }
+            else
+            {
+                _db.ProductImages.Add(new ProductImgData
+                {
+                    Url = url,
+                    ProductId = productId
+                });
+            }
+            _db.SaveChanges();
+            return product;
+        }
     }
 }

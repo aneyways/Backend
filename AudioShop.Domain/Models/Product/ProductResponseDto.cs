@@ -13,6 +13,13 @@ namespace AudioShop.Domains.Models.Product
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string Category { get; set; }
+        public List<ProductImageResponseDto> Images { get; set; } = new();
 
+    }
+    public class ProductImageResponseDto
+    {
+        public int Id { get; set; }
+        public string Url { get; set; }
+        public int ProductId { get; set; }
     }
 }

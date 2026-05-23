@@ -20,5 +20,8 @@ namespace AudioShop.BusinessLogic.Interface
         public ProductResponseDto GetByIdProductAction(int id);
 
         public List<ProductResponseDto> GetByCategoryProductsAction(string _category);
+
+        ProductResponseDto AddProductImageAction(int productId, string url);
+        ProductResponseDto UpdateProductImageAction(int productId, string url);
     }
 }
