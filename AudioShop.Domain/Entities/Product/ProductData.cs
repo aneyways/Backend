@@ -1,6 +1,7 @@
 ﻿using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Entities.Category;
 using AudioShop.Domains.Entities.Order;
+using AudioShop.Domains.Entities.Product;
 using AudioShop.Domains.Entities.Refs;
 using AudioShop.Domains.Enums;
 using System.ComponentModel.DataAnnotations;

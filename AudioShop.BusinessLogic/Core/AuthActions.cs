@@ -9,6 +9,7 @@ using AudioShop.Domains.Entities.User;
 using AudioShop.Domains.Enums.Cart;
 using AudioShop.Domains.Models.Auth;
 using AudioShop.Domains.Enums.User;
+using AudioShop.BusinessLogic;
 
 namespace AudioShop.BusinessLogic.Core
 {
@@ -18,9 +19,15 @@ namespace AudioShop.BusinessLogic.Core
 
         public UserData ExecuteLoginAction(LoginDto _login)
         {
-            return _db.UserDatas.FirstOrDefault(u =>
-                u.UserName == _login.UserName &&
-                u.Password == _login.Password);
+            var user = _db.UserDatas
+                .FirstOrDefault(u => u.UserName == _login.UserName);
+
+            if (user == null) return null;
+
+            if (!PasswordHasher.Verify(_login.Password, user.Password))
+                return null;
+
+            return user;
         }
 
         public UserData ExecuteRegisterAction(RegisterDto _register)
@@ -32,7 +39,7 @@ namespace AudioShop.BusinessLogic.Core
             {
                 UserName = _register.UserName,
                 Email = _register.Email,
-                Password = _register.Password,
+                Password = PasswordHasher.Hash(_register.Password),
                 Role = UserRole.User,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,

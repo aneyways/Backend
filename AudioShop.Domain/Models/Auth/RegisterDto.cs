@@ -1,17 +1,26 @@
-﻿using System;
+﻿using AudioShop.Domains.Enums.User;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioShop.Domains.Enums.User;
 
 namespace AudioShop.Domains.Models.Auth
 {
     public class RegisterDto
     {
+        [Required]
         public string UserName { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
+
+        [Required]
+        [MinLength(8)]
         public string Password { get; set; }
+
         public UserRole Role { get; set; } = UserRole.User;
     }
 }

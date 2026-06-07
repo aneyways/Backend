@@ -30,6 +30,9 @@ namespace AudioShop.API.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterDto _register)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var token = _authActions.RegisterAction(_register);
             if (token == null) return BadRequest("User already exists");
             return Ok(new { token });

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AudioShop.DataAccess.Context;
+﻿using AudioShop.DataAccess.Context;
 using AudioShop.Domains.Entities.Cart;
 using AudioShop.Domains.Entities.User;
 using AudioShop.Domains.Enums.Cart;

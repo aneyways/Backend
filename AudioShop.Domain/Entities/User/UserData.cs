@@ -23,7 +23,7 @@ namespace AudioShop.Domains.Entities.User
         [StringLength(20, MinimumLength = 1)]
         public string UserName { get; set; }
         [Required]
-        [StringLength(32, MinimumLength = 8)]
+        [StringLength(256, MinimumLength = 8)]
         public string Password { get; set; }
 
         [Required]

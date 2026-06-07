@@ -11,5 +11,4 @@ namespace AudioShop.Domains.Enums.User
         User = 1,
         Admin = 2
     }
-
 }
